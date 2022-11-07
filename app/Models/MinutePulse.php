@@ -10,4 +10,13 @@ class MinutePulse extends Model
     use HasFactory;
 
     protected $table = "MinutePulses";
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected $casts = [
+        'isActive' => 'boolean',
+        'isSynced' => 'boolean',
+        'isIdle' => 'boolean'
+    ];
 }

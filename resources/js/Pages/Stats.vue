@@ -3,11 +3,12 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 
 setInterval(() => {
-    Inertia.reload({ only: ['timeSlots'] });
+    Inertia.reload({ only: ['timeSlots', 'totalTime'] });
 }, 10000);
 
 defineProps({
     timeSlots: Array,
+    totalTime: Number,
 })
 </script>
 
@@ -15,8 +16,8 @@ defineProps({
 
     <Head title="Welcome" />
 
-
     <div aria-label="group of cards" tabindex="0" class="focus:outline-none py-8 w-full">
+        <h1 class="text-6xl text-center">{{ totalTime }}</h1>
         <div class="lg:flex flex-wrap items-center justify-center w-full">
             <div v-for="timeSlot in timeSlots" :key="timeSlot.id" tabindex="0" aria-label="card 1"
                 class="focus:outline-none lg:w-5/12 lg:mr-7 lg:mb-0 m-6 bg-white dark:bg-gray-800  p-6 shadow rounded border-spacing-2">
@@ -52,7 +53,7 @@ defineProps({
                             </p>
                             <p tabindex="0"
                                 class="focus:outline-none text-sm leading-normal pt-2 text-gray-800 dark:text-gray-200 ">
-                                Day: <b>{{ new Date(timeSlot.day).toISOString() }}</b>
+                                Day: <b>{{ timeSlot.day }}</b>
                             </p>
                         </div>
                         <div class="pl-3 w-1/2" v-if="timeSlot.screenshots[0]">
@@ -90,6 +91,9 @@ defineProps({
                                     <th scope="col" class="py-3 px-6">
                                         keystrokes
                                     </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        isComplete
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,6 +111,9 @@ defineProps({
                                     </td>
                                     <td class="py-4 px-6">
                                         {{ minutePulse.keystrokes }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ minutePulse.isComplete }}
                                     </td>
                                 </tr>
                             </tbody>
