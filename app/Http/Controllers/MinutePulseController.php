@@ -12,10 +12,9 @@ class MinutePulseController extends Controller
     {
         $pulses = MinutePulse::orderByDesc('minuteTime')->get();
 
-        // return $pulses;
-
         return Inertia::render('Pulses', [
-            'pulses' => $pulses
+            'pulses' => $pulses,
+            'total' => $pulses->count()
         ]);
     }
 }

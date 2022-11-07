@@ -3,12 +3,12 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 
 setInterval(() => {
-    Inertia.reload({ only: ['pulses'] });
+    Inertia.reload({ only: ['pulses', 'total'] });
 }, 10000);
 
 defineProps({
     pulses: Array,
-    // totalTime: Number,
+    total: Number,
 })
 </script>
 
@@ -22,6 +22,7 @@ defineProps({
 
 
             <div class="overflow-x-auto relative">
+                <h1 class="display-1 text-center">{{ total }}</h1>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -56,7 +57,7 @@ defineProps({
                             <td class="py-4 px-6">
                                 {{ pulse.id }}
                             </td>
-                            <td class="py-4 px-6">
+                            <td class="py-4 px-6 text-red-700">
                                 {{ new Date(pulse.minuteTime).toISOString() }}
                             </td>
                             <td class="py-4 px-6">
